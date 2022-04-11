@@ -1,0 +1,62 @@
+[
+    {
+        "ID": 1,
+        "optionID": 1,
+        "value": "red" 
+    },
+    {
+        "ID": 2,
+        "optionID": 1,
+        "value": "blue" 
+    },
+    {
+        "ID": 3,
+        "optionID": 1,
+        "value": "green" 
+    },
+    {
+        "ID": 4,
+        "optionID": 2,
+        "value": "10mg"
+    },
+    {
+        "ID": 5,
+        "optionID": 2,
+        "value": "30mg"
+    },
+    {
+        "ID": 6,
+        "optionID": 2,
+        "value": "50mg"
+    },
+    {
+        "ID": 7,
+        "optionID": 3,
+        "value": "10$"
+    },
+    {
+        "ID": 8,
+        "optionID": 3,
+        "value": "20$"
+    },
+    {
+        "ID": 9,
+        "optionID": 3,
+        "value": "30$"
+    },
+    {
+        "ID": 10,
+        "optionID": 4,
+        "value": "554"
+    },
+    {
+        "ID": 11,
+        "optionID": 4,
+        "value": "665"
+    },
+    {
+        "ID": 12,
+        "optionID": 4,
+        "value": "778"
+    }
+]

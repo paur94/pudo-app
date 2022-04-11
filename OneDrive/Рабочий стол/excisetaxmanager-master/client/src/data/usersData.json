@@ -1,0 +1,62 @@
+[
+    {
+        "ID": 1,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg"
+    },
+    {
+        "ID": 2,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg"
+    },
+    {
+        "ID": 3,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg" 
+    },
+    {
+        "ID": 4,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg"
+    },
+    {
+        "ID": 5,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg"
+    },
+    {
+        "ID": 6,
+        "fname": "Rob",
+        "lname": "Eberhardt",
+        "username": "robeberhardt",
+        "password": "thx1138",
+        "email": "rob.eberhardt@gmail.com",
+        "position": "Marketing manager",        
+        "Image": "https://cacdc.org/wp-content/uploads/2016/08/KHowell-Headshot-810x648-275x275.jpg"
+    }
+]

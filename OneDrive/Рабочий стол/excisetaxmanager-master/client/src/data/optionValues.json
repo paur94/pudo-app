@@ -1,0 +1,18 @@
+[
+    {
+        "ID": 1,
+        "name": "color"
+    },
+    {
+        "ID": 2,
+        "name": "size"
+    },
+    {
+        "ID": 3,
+        "name": "price"
+    },
+    {
+        "ID": 4,
+        "name": "quantity"
+    }
+]

@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+table .Polaris-DataTable__Cell {
+  padding: 1rem;
+}
+
+table .Polaris-DataTable__Cell--header {
+  border-bottom: none;
+}
+
+.Polaris-DataTable__TableRow .Polaris-DataTable__Cell {
+  border-top: 0.1rem solid var(--p-divider);
+}
+
+table .Polaris-DataTable__Cell--header {
+  font-weight: 600;
+}
