@@ -22,7 +22,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
   const pudo_req_data = {
     partnerCode: PUDO_CODE,
     partnerPassword: PUDO_PASSWORD,
-    trackingNumber: payload.tracking_number,
+    trackingNumber: "1234",
     memberMobile: payload.destination.phone,
     memberEmail: payload.email,
   };
@@ -33,7 +33,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     },
     body: JSON.stringify(pudo_req_data),
   });
-  const pudo_data = await pudo_response.json()
+  const pudo_data = await pudo_response.json();
   console.log(pudo_data);
 
   res.status(201).send({
