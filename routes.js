@@ -8,7 +8,7 @@ const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
 router.get("/", function (req, res) {
   res.send("Welcome to the Webhooks API");
 });
-console.log(PUDO_CODE)
+
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
 
