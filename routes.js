@@ -26,6 +26,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberMobile: payload.destination.phone,
     memberEmail: payload.email,
   };
+  console.log(PUDO_CODE, PUDO_PASSWORD)
   const pudo_response = await fetch(PUDO_URL, {
     method: "POST",
     headers: {
