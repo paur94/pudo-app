@@ -13,7 +13,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
 
   if (!payload.tracking_number) {
-    res.status(201).send({
+    res.status(200).send({
       message: "Webhook Event successfully logged",
     });
     return;
@@ -26,7 +26,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberMobile: payload.destination.phone,
     memberEmail: payload.email,
   };
-  console.log(PUDO_CODE, PUDO_PASSWORD)
+  
   const pudo_response = await fetch(PUDO_URL, {
     method: "POST",
     headers: {
@@ -37,7 +37,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
   const pudo_data = await pudo_response.json();
   console.log(pudo_data);
 
-  res.status(201).send({
+  res.status(200).send({
     message: "Webhook Event successfully logged",
   });
 });
