@@ -41,7 +41,6 @@ router.post("/fulfillment_webhook", async function (req, res) {
     message: "Webhook Event successfully logged",
   });
 
-  res.connection.destroy();
 });
 
 module.exports = router;
