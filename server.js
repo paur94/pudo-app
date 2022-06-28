@@ -21,7 +21,7 @@ app.use(bodyParser.json(
 const port = process.env.PORT || "1337";
 app.set("port", port);
 
-app.use('/', routes);
+// app.use('/', routes);
 
 // Server
 app.listen(port, () => console.log(`Server running on localhost:${port}`));
