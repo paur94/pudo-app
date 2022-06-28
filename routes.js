@@ -1,7 +1,7 @@
 const express = require("express");
-const fetch = require( "node-fetch");
+const fetch = require("node-fetch");
 const router = express.Router();
-require('dotenv').config()
+require("dotenv").config();
 
 const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
 
@@ -26,7 +26,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberMobile: payload.destination.phone,
     memberEmail: payload.email,
   };
-  
+
   const pudo_response = await fetch(PUDO_URL, {
     method: "POST",
     headers: {
@@ -40,6 +40,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
   res.status(200).send({
     message: "Webhook Event successfully logged",
   });
+  return;
 });
 
 module.exports = router;
