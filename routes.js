@@ -11,7 +11,7 @@ router.get("/", function (req, res) {
 
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
-console.log(payload, 'payload')
+  console.log(payload, 'payload')
   if (!payload.tracking_number) {
     res.status(200).send({
       message: "Webhook Event successfully logged",
