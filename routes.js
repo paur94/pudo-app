@@ -24,10 +24,6 @@ router.post("/fulfillment_webhook", async function (req, res) {
     trackingNumber: "1234",
     memberEmail: payload.email,
     memberName: payload.destination.name,
-    memberAddress: payload.destination.address1,
-    memberCity: payload.destination.city,
-    memberProvince: payload.destination.province,
-    memberPostal: payload.destination.zip,
     memberPhone: payload.destination.phone
   };
 
