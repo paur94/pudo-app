@@ -23,8 +23,13 @@ router.post("/fulfillment_webhook", async function (req, res) {
     partnerCode: PUDO_CODE,
     partnerPassword: PUDO_PASSWORD,
     trackingNumber: "1234",
-    memberMobile: payload.destination.phone,
     memberEmail: payload.email,
+    memberName: payload.destination.name,
+    memberAddress: payload.destination.address1,
+    memberCity: payload.destination.city,
+    memberProvince: payload.destination.province,
+    memberPostal: payload.destination.zip,
+    memberPhone: payload.destination.phone
   };
 
   const pudo_response = await fetch(PUDO_URL, {
