@@ -11,7 +11,7 @@ router.get("/", function (req, res) {
 
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
-  if (!payload.tracking_number) {
+  if (!(payload.tracking_number && payload.destination?.company?.indexOf("PUDO") > -1)) {
     res.status(200).send({
       message: "Webhook Event successfully logged",
     });
