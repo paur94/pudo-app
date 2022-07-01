@@ -11,7 +11,13 @@ router.get("/", function (req, res) {
 
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
-  if (!(payload.tracking_number && payload.destination?.company?.indexOf("PUDO") > -1)) {
+  console.log("order_id", payload.order_id);
+  if (
+    !(
+      payload.tracking_number &&
+      payload.destination?.company?.indexOf("PUDO") > -1
+    )
+  ) {
     res.status(200).send({
       message: "Webhook Event successfully logged",
     });
@@ -24,7 +30,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     trackingNumber: "1234",
     memberEmail: payload.email,
     memberName: payload.destination.name,
-    memberPhone: payload.destination.phone
+    memberPhone: payload.destination.phone,
   };
 
   const pudo_response = await fetch(PUDO_URL, {
@@ -40,7 +46,6 @@ router.post("/fulfillment_webhook", async function (req, res) {
   res.status(200).send({
     message: "Webhook Event successfully logged",
   });
-
 });
 
 module.exports = router;
