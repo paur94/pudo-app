@@ -33,8 +33,9 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberName: payload.destination.name,
     memberPhone: payload.destination.phone,
     memberNo: "",
-	  orderDetails: "23465",
-	  customerAccountNo: ""
+	  orderDetails: payload.order_id,
+	  customerAccountNo: "",
+    dealerNo: 11975
   };
 
   const pudo_response = await fetch(PUDO_URL, {
