@@ -33,7 +33,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberName: payload.destination.name,
     memberPhone: payload.destination.phone,
     memberNo: "",
-	  orderDetails: payload.order_id,
+	  orderDetails: payload.name,
 	  customerAccountNo: "",
     dealerNo: 11975
   };
