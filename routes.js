@@ -11,6 +11,7 @@ router.get("/", function (req, res) {
 
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
+  console.log(payload);
   console.log("updated_order_id", payload.order_id);
   if (
     !(
