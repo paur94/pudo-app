@@ -32,7 +32,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberName: payload.destination.name,
     memberPhone: payload.destination.phone,
     memberNo: "",
-	  orderDetails: "",
+	  orderDetails: "23465",
 	  customerAccountNo: ""
   };
 
