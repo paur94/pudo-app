@@ -35,7 +35,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberNo: "",
 	  orderDetails: payload.name,
 	  customerAccountNo: "",
-    dealerNo: 12018
+    dealerNo: payload.destination.company.split(" ")[0].replace( /^\D+/g, '')
   };
 
   const pudo_response = await fetch(PUDO_URL, {
