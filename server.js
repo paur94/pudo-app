@@ -1,8 +1,8 @@
 const express = require("express");
 const routes = require("./routes");
-const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const mongoose = require("mongoose");
 // App
 console.log(process.env.PUDO_URL)
 const app = express();
