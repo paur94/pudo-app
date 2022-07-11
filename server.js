@@ -13,7 +13,6 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_CONNECTION,
   {
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true
   }
 );
