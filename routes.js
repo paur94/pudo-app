@@ -5,10 +5,31 @@ require("dotenv").config();
 const orderModel = require("./models");
 const app = express();
 
-const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
+const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD, MONGO_CONNECTION } = process.env;
 
 app.post("/fulfillment_webhook", async (request, response) => {
   const order = new orderModel(request.body);
+
+
+
+  const mongo_req_data = {
+    orderId: payload.name,
+    orderNumber: 12345,
+    registeredInPudo: false,
+    shipmentStatusIsPlaced: false
+  };
+
+  const mongo_response = await fetch(MONGO_CONNECTION, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(mongo_req_data),
+  });
+  const mongo_data = await mongo_response.json();
+  console.log(mongo_data);
+
+
 
   try {
     await order.save();
