@@ -10,11 +10,10 @@ const app = express();
 
 //mongoose
 app.use(express.json());
-console.log(process.env.MONGO_CONNECTION)
 mongoose.connect(process.env.MONGO_CONNECTION,
   {
     useNewUrlParser: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useUnifiedTopology: true
   }
 );
