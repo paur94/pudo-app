@@ -1,10 +1,31 @@
 const express = require("express");
 const routes = require("./routes");
+const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 require('dotenv').config();
 // App
 console.log(process.env.PUDO_URL)
 const app = express();
+
+
+//mongoose
+const { MONGO_CONNECTION } = process.env;
+app.use(express.json());
+
+mongoose.connect(MONGO_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  }
+);
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
+
 
 app.use(bodyParser.json(
     {
@@ -15,7 +36,6 @@ app.use(bodyParser.json(
         },
     }
 ));
-
 
 // Set port
 const port = process.env.PORT || "1337";

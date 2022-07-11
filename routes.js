@@ -2,8 +2,21 @@ const express = require("express");
 const fetch = require("node-fetch");
 const router = express.Router();
 require("dotenv").config();
+const orderModel = require("./models");
+const app = express();
 
 const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
+
+app.post("/add_user", async (request, response) => {
+  const order = new orderModel(request.body);
+
+  try {
+    await order.save();
+    response.send(user);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 
 router.get("/", function (req, res) {
   res.send("Welcome to the Webhooks API");
@@ -12,12 +25,7 @@ router.get("/", function (req, res) {
 router.post("/fulfillment_webhook", async function (req, res) {
   const payload = req.body;
   console.log("updated_order_id", payload.order_id);
-  if (
-    !(
-      payload.tracking_number &&
-      payload.destination?.company?.indexOf("PUDO") > -1
-    )
-  ) {
+  if (!(payload.tracking_number && payload.destination?.company?.indexOf("PUDO") > -1)) {
     res.status(200).send({
       message: "Webhook Event successfully logged",
     });
@@ -34,7 +42,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     memberNo: "",
 	  orderDetails: payload.name,
 	  customerAccountNo: "",
-    dealerNo: payload.destination.company.split(" ")[0].replace( /^\D+/g, '')
+    dealerNo: +payload.destination.company.split(" ")[0].replace( /^\D+/g, '')
   };
 
   const pudo_response = await fetch(PUDO_URL, {

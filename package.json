@@ -12,10 +12,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^16.0.1",
-    "express": "^4.16.4",
+    "express": "^4.18.1",
     "install": "^0.13.0",
     "mongodb": "^3.6.0",
     "mongodb-memory-server": "^6.6.7",
+    "mongoose": "^6.4.4",
     "node-fetch": "^2.6.7"
   },
   "engines": {
