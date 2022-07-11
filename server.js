@@ -9,10 +9,9 @@ const app = express();
 
 
 //mongoose
-const { MONGO_CONNECTION } = process.env;
 app.use(express.json());
-
-mongoose.connect(MONGO_CONNECTION,
+console.log(process.env.MONGO_CONNECTION)
+mongoose.connect(process.env.MONGO_CONNECTION,
   {
     useNewUrlParser: true,
     useFindAndModify: true,
