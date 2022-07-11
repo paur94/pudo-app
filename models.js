@@ -10,11 +10,11 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
   registeredInPudo: {
-    type: boolean,
+    type: Boolean,
     required: true,
   },
   shipmentStatusIsPlaced: {
-    type: boolean,
+    type: Boolean,
     required: true,
   }
 });
