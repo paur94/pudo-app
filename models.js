@@ -6,7 +6,7 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
   orderNumber: {
-    type: string,
+    type: String,
     required: true,
   },
   registeredInPudo: {
