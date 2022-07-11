@@ -7,7 +7,7 @@ const app = express();
 
 const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
 
-app.post("/add_user", async (request, response) => {
+app.post("/fulfillment_webhook", async (request, response) => {
   const order = new orderModel(request.body);
 
   try {
