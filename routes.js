@@ -11,12 +11,14 @@ router.get("/", function (req, res) {
 });
 
 router.post("/fulfillment_webhook", async function (req, res) {
+  console.log("endpoin was called");
   const payload = req.body;
-
   if (!payload || !payload.order_id)
     return res.status(500).send({
       message: "No order id present",
     });
+
+  console.log(`Order ${payload.order_id} fulfillment web hook received`);
 
   if (
     !(
@@ -24,6 +26,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
       payload.destination?.company?.indexOf("PUDO") > -1
     )
   ) {
+    console.log(`Order ${payload.order_id} is not PUDO order`);
     res.status(200).send({
       message: "Webhook Event successfully logged",
     });
@@ -34,6 +37,8 @@ router.post("/fulfillment_webhook", async function (req, res) {
     orderId: payload.order_id,
   });
   if (!pudo_order_from_db) {
+    console.log(`Registering order ${payload.order_id}`);
+
     const pudo_req_data = {
       partnerCode: PUDO_CODE,
       partnerPassword: PUDO_PASSWORD,
@@ -71,6 +76,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
       orderNumber: payload.name,
       PudoNumber: pudo_data?.shipment?.PUDONo,
     });
+    console.log(`Order ${payload.order_id} successfully registered`);
 
     return res.status(200).send({
       message: "Webhook Event successfully logged",
@@ -80,6 +86,8 @@ router.post("/fulfillment_webhook", async function (req, res) {
     !pudo_order_from_db?.shipmentStatusIsPlaced &&
     payload.shipment_status === "delivered"
   ) {
+    console.log(`Placing order ${payload.order_id} shipment`);
+
     const pudo_place_shipment_req_data = {
       partnerCode: PUDO_CODE,
       partnerPassword: PUDO_PASSWORD,
@@ -87,13 +95,16 @@ router.post("/fulfillment_webhook", async function (req, res) {
       trackingNumber: payload.tracking_number,
     };
 
-    const pudo_place_shipment_response = await fetch(`${PUDO_URL}/PlaceShipmentStatus`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(pudo_place_shipment_req_data),
-    });
+    const pudo_place_shipment_response = await fetch(
+      `${PUDO_URL}/PlaceShipmentStatus`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pudo_place_shipment_req_data),
+      }
+    );
     const pudo_place_shipment_data = await pudo_place_shipment_response.json();
 
     if (pudo_place_shipment_data?.Result?.toUpperCase() != "SUCCESS")
@@ -101,13 +112,19 @@ router.post("/fulfillment_webhook", async function (req, res) {
         message: "Shipment was not placed at PUDO",
         error: pudo_place_shipment_data?.ErrorMessage,
       });
+
+    console.log(`Order ${payload.order_id} shipmet was successfully placed`);
+
     return res.status(200).send({
       message: "Order shipment was placed at PUDO",
     });
-  } else
+  } else {
+    console.log(`Order ${payload.order_id} is registered doing nothing`);
+
     return res.status(200).send({
       message: "Order already registered and shipent status is placed",
     });
+  }
 });
 
 module.exports = router;
