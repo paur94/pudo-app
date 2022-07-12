@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 console.log(process.env.PUDO_URL)
 const app = express();
 
-
 //mongoose
 app.use(express.json());
 mongoose.connect(process.env.MONGO_CONNECTION,
@@ -22,6 +21,7 @@ db.once("open", function () {
   console.log("Connected successfully");
 });
 
+app.use(routes);
 
 app.use(bodyParser.json(
     {
