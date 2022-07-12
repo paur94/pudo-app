@@ -47,7 +47,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
       dealerNo: +payload.destination.company.split(" ")[0].replace(/^\D+/g, ""),
     };
 
-    const pudo_response = await fetch(PUDO_URL, {
+    const pudo_response = await fetch(`${PUDO_URL}/PlaceShipment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,14 +87,14 @@ router.post("/fulfillment_webhook", async function (req, res) {
       trackingNumber: payload.tracking_number,
     };
 
-    const pudo_place_shipment_response = await fetch(PUDO_URL, {
+    const pudo_place_shipment_response = await fetch(`${PUDO_URL}/PlaceShipmentStatus`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(pudo_place_shipment_req_data),
     });
-    const pudo_place_shipment_data = await pudo_response.json();
+    const pudo_place_shipment_data = await pudo_place_shipment_response.json();
 
     if (pudo_place_shipment_data?.Result?.toUpperCase() != "SUCCESS")
       return res.status(500).send({
