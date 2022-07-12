@@ -7,7 +7,7 @@ const app = express();
 
 const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
 
-router.post("/add_order", async (request, response) => {
+app.post("/add_order", async (request, response) => {
   const order = new orderModel(request.body);
   // const mongo_req_data = {
   //   orderId: "16263",
