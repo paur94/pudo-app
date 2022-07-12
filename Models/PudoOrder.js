@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema({
+const PudoOrderSchema = new mongoose.Schema({
   orderId: {
     type: String,
     required: true,
@@ -9,16 +9,16 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  registeredInPudo: {
-    type: Boolean,
+  PudoNumber: {
+    type: String,
     required: true,
   },
   shipmentStatusIsPlaced: {
     type: Boolean,
-    required: true,
+    default:false
   }
 });
 
-const Order = mongoose.model("Order", OrderSchema);
+const PudoOrder = mongoose.model("PudoOrder", PudoOrderSchema);
 
-module.exports = Order;
+module.exports = PudoOrder;
