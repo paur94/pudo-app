@@ -11,14 +11,14 @@ router.get("/", function (req, res) {
 });
 
 router.post("/fulfillment_webhook", async function (req, res) {
-  console.log("endpoin was called");
+  console.log("Endpoint was called");
   const payload = req.body;
   if (!payload || !payload.order_id)
     return res.status(500).send({
-      message: "No order id present",
+      message: "No order id presented",
     });
 
-  console.log(`Order ${payload.order_id} fulfillment web hook received`);
+  console.log(`Order ${payload.order_id} fulfillment webhook received`);
 
   if (
     !(
@@ -60,15 +60,16 @@ router.post("/fulfillment_webhook", async function (req, res) {
       body: JSON.stringify(pudo_req_data),
     });
     const pudo_data = await pudo_response.json();
+    console.log(pudo_data, 'PUDO placed shipment')
 
     if (!pudo_data || pudo_data.Result?.toUpperCase() != "SUCCESS")
       return res.status(500).send({
-        message: "Pudo Registraton was not successfull",
+        message: "PUDO Registration was not successfull",
       });
 
     if (!pudo_data?.shipment?.PUDONo)
       return res.status(500).send({
-        message: "Could not find pudo number",
+        message: "Could not find PUDO number",
       });
 
     const pudo_order_res = await PudoOrder.create({
@@ -106,6 +107,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
       }
     );
     const pudo_place_shipment_data = await pudo_place_shipment_response.json();
+    console.log(pudo_place_shipment_data, 'PUDO placed shipment status')
 
     if (pudo_place_shipment_data?.Result?.toUpperCase() != "SUCCESS")
       return res.status(500).send({
@@ -113,7 +115,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
         error: pudo_place_shipment_data?.ErrorMessage,
       });
 
-    console.log(`Order ${payload.order_id} shipmet was successfully placed`);
+    console.log(`Order ${payload.order_id} shipment was successfully placed`);
 
     return res.status(200).send({
       message: "Order shipment was placed at PUDO",
