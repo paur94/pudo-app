@@ -87,7 +87,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     !pudo_order_from_db?.shipmentStatusIsPlaced &&
     payload.shipment_status === "delivered"
   ) {
-    console.log(`Placing order ${payload.order_id} shipment`);
+    console.log(`Placing order ${payload.order_id} shipment `);
 
     const pudo_place_shipment_req_data = {
       partnerCode: PUDO_CODE,
