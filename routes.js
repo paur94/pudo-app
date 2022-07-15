@@ -13,7 +13,7 @@ router.get("/", function (req, res) {
 router.post("/fulfillment_webhook", async function (req, res) {
   console.log("Endpoint was called");
   const payload = req.body;
-  console.log('payload', payload)
+
   if (!payload || !payload.order_id)
     return res.status(500).send({
       message: "No order id presented",
