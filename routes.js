@@ -45,7 +45,7 @@ router.post("/pd_shipment_status", async function (req, res) {
 
         if (
             !lastShipmentStatus ||
-            isLessThan24HourAgo(lastShipmentStatus.created)
+            isLessThan24HourAgo(lastShipmentStatus?.created)
         ) {
             console.log(
                 "isLessThan24HourAgo",
