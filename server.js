@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 console.log(process.env.PUDO_URL);
 const app = express();
 app.use(cors());
- //mongoose
+//mongoose
 app.use(express.json());
 
 app.use((req, res, next) => {
