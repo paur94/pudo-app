@@ -27,6 +27,7 @@ app.use((req, res, next) => {
     }
     next();
 });
+ 
 
 mongoose.connect(process.env.MONGO_CONNECTION, (err) => {
     if (err) throw err;
