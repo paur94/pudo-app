@@ -1,19 +1,5 @@
 const express = require("express");
 const cors = require('cors')
-var cors_proxy = require('cors-anywhere');
-
-
-var host = process.env.HOST || '0.0.0.0';
-// Listen on a specific port via the PORT environment variable
-var port1 = process.env.PORT || 1337;
-
-cors_proxy.createServer({
-    originWhitelist: [], // Allow all origins
-    requireHeader: ['origin', 'x-requested-with'],
-    removeHeaders: ['cookie', 'cookie2']
-}).listen(port1, host, function() {
-    console.log('Running CORS Anywhere on ' + host + ':' + port1);
-});
 
 const routes = require("./routes");
 const bodyParser = require('body-parser');
@@ -22,7 +8,7 @@ const mongoose = require("mongoose");
 // App
 console.log(process.env.PUDO_URL)
 const app = express();
-app.use(cors())
+app.use(cors({ origin: "/pd_shipment_status", credentials: true }))
 //mongoose
 app.use(express.json());
 mongoose.connect(process.env.MONGO_CONNECTION,
