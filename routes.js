@@ -40,17 +40,16 @@ router.post("/pd_shipment_status", async function (req, res) {
         });
     else {
         const lastShipmentStatus = pudoOrder.shipmentStatuses?.sort((a, b) => {
-            console.log(2222222222)
             return b.created - a.created;
         })[0];
 
         if (
             !lastShipmentStatus ||
-            isLessThan24HourAgo(lastShipmentStatus?.created)
+            isLessThan24HourAgo(lastShipmentStatus.created)
         ) {
             console.log(
                 "isLessThan24HourAgo",
-                isLessThan24HourAgo(lastShipmentStatus?.created)
+                isLessThan24HourAgo(lastShipmentStatus.created)
             );
             await PlaceShipmentStatus(
                 pudoOrder,
@@ -83,7 +82,6 @@ router.post("/pd_shipment_status", async function (req, res) {
             });
         } else {
             const lastTrackinEvent = lastShipmentStatus?.response?.trackingEvents?.sort((a, b) => {
-                console.log(11111111)
                 return (
                     new Date(b.trackingDateStr) - new Date(a.trackingDateStr)
                 );
