@@ -21,7 +21,7 @@ router.post("/pd_shipment_status", async function (req, res) {
 
     const pudoOrder = await PudoOrder.findOne({
         orderId: payload.order_id,
-    }).populate("shipmentStatuses");
+    }).populate("shipmentStatuses", "shipment");
 
     if (!pudoOrder) return res.status(404);
 
@@ -32,10 +32,8 @@ router.post("/pd_shipment_status", async function (req, res) {
     if (shipmentStatus)
         return res.status(200).send({
             data: {
-                status: "DEL",
-                date: shipmentStatus.trackingEvents.find(
-                    (te) => te.trackingStatusCode === "DEL"
-                ).trackingDateStr,
+                shipment: pudoOrder.shipment,
+                shipmentStatuses: pudoOrder.shipmentStatuses,
             },
         });
     else {
@@ -47,10 +45,7 @@ router.post("/pd_shipment_status", async function (req, res) {
             !lastShipmentStatus ||
             isLessThan24HourAgo(lastShipmentStatus.created)
         ) {
-            await PlaceShipmentStatus(
-                pudoOrder,
-                payload.tracking_number
-            );
+            await PlaceShipmentStatus(pudoOrder, payload.tracking_number);
             const updatedPudoOrder = await PudoOrder.findOne({
                 orderId: payload.order_id,
             }).populate("shipmentStatuses");
@@ -72,29 +67,31 @@ router.post("/pd_shipment_status", async function (req, res) {
 
             return res.status(200).send({
                 data: {
-                    status: lastTrackinEvent.trackingStatusCode,
-                    date: lastTrackinEvent.trackingDateStr,
+                    shipment: pudoOrder.shipment,
+                    shipmentStatuses: pudoOrder.shipmentStatuses,
                 },
             });
         } else {
-            const lastTrackinEvent = lastShipmentStatus?.response?.trackingEvents?.sort((a, b) => {
-                return (
-                    new Date(b.trackingDateStr) - new Date(a.trackingDateStr)
-                );
-            })?.[0];
+            const lastTrackinEvent =
+                lastShipmentStatus?.response?.trackingEvents?.sort((a, b) => {
+                    return (
+                        new Date(b.trackingDateStr) -
+                        new Date(a.trackingDateStr)
+                    );
+                })?.[0];
 
             if (!lastTrackinEvent)
                 return res.status(200).send({
                     data: {
-                        status: "REG",
-                        date: pudoOrder.created,
+                        shipment: pudoOrder.shipment,
+                        shipmentStatuses: pudoOrder.shipmentStatuses,
                     },
                 });
 
             return res.status(200).send({
                 data: {
-                    status: lastTrackinEvent.trackingStatusCode,
-                    date: lastTrackinEvent.trackingDateStr,
+                    shipment: pudoOrder.shipment,
+                    shipmentStatuses: pudoOrder.shipmentStatuses,
                 },
             });
         }
