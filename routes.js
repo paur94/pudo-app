@@ -47,10 +47,6 @@ router.post("/pd_shipment_status", async function (req, res) {
             !lastShipmentStatus ||
             isLessThan24HourAgo(lastShipmentStatus.created)
         ) {
-            console.log(
-                "isLessThan24HourAgo",
-                isLessThan24HourAgo(lastShipmentStatus.created)
-            );
             await PlaceShipmentStatus(
                 pudoOrder,
                 payload.tracking_number
