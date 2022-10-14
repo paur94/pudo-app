@@ -21,7 +21,7 @@ router.post("/pd_shipment_status", async function (req, res) {
 
     const pudoOrder = await PudoOrder.findOne({
         orderId: payload.order_id,
-    }).populate("shipmentStatuses", "shipment");
+    }).populate("shipmentStatuses").populate("shipment");
 
     if (!pudoOrder) return res.status(404);
 
