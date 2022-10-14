@@ -42,7 +42,7 @@ router.post("/pd_shipment_status", async function (req, res) {
         })[0];
 
         if (
-            !lastShipmentStatus ||
+            !lastShipmentStatus || !lastShipmentStatus.created || 
             isLessThan24HourAgo(lastShipmentStatus.created)
         ) {
             await PlaceShipmentStatus(pudoOrder, payload.tracking_number);
