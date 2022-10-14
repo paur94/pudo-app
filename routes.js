@@ -71,7 +71,7 @@ router.post("/pd_shipment_status", async function (req, res) {
             return res.status(200).send({
                 data: {
                     shipment: pudoOrder.shipment,
-                    shipmentStatuses: pudoOrder.shipmentStatuses,
+                    shipmentStatuse: updatedLastShipmentStatus,
                 },
             });
         } else {
@@ -87,14 +87,14 @@ router.post("/pd_shipment_status", async function (req, res) {
                 return res.status(200).send({
                     data: {
                         shipment: pudoOrder.shipment,
-                        shipmentStatuses: pudoOrder.shipmentStatuses,
+                        shipmentStatuse: lastShipmentStatus,
                     },
                 });
 
             return res.status(200).send({
                 data: {
                     shipment: pudoOrder.shipment,
-                    shipmentStatuses: pudoOrder.shipmentStatuses,
+                    shipmentStatuse: lastShipmentStatus,
                 },
             });
         }
