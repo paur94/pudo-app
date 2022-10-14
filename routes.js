@@ -4,7 +4,7 @@ const router = express.Router();
 require("dotenv").config();
 const PudoOrder = require("./Models/PudoOrder");
 const PudoShipmentStatus = require("./Models/PudoShipmentStatus");
-const PudoShipment = require("./Models/PudoShipmentStatus");
+const PudoShipment = require("./Models/PudoShipment");
 
 const { PUDO_URL, PUDO_CODE, PUDO_PASSWORD } = process.env;
 
@@ -21,7 +21,9 @@ router.post("/pd_shipment_status", async function (req, res) {
 
     const pudoOrder = await PudoOrder.findOne({
         orderId: payload.order_id,
-    }).populate("shipmentStatuses").populate("shipment");
+    })
+        .populate("shipmentStatuses")
+        .populate("shipment");
 
     if (!pudoOrder) return res.status(404);
 
@@ -42,7 +44,8 @@ router.post("/pd_shipment_status", async function (req, res) {
         })[0];
 
         if (
-            !lastShipmentStatus || !lastShipmentStatus.created || 
+            !lastShipmentStatus ||
+            !lastShipmentStatus.created ||
             isLessThan24HourAgo(lastShipmentStatus.created)
         ) {
             await PlaceShipmentStatus(pudoOrder, payload.tracking_number);
@@ -125,6 +128,7 @@ router.post("/fulfillment_webhook", async function (req, res) {
     const pudo_order_from_db = await PudoOrder.findOne({
         orderId: payload.order_id,
     });
+
     if (!pudo_order_from_db) {
         console.log(`Registering order ${payload.order_id}`);
 
@@ -162,11 +166,12 @@ router.post("/fulfillment_webhook", async function (req, res) {
                 message: "Could not find PUDO number",
             });
 
+        const shipment = await PudoShipment.create({ response: pudo_data });
         const pudo_order_res = await PudoOrder.create({
             orderId: payload.order_id,
             orderNumber: payload.name,
             PudoNumber: pudo_data?.shipment?.PUDONo,
-            shipment: { response: pudo_data },
+            shipment: shipment._id,
         });
 
         console.log(`Order ${payload.order_id} successfully registered`);
