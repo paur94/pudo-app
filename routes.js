@@ -14,6 +14,7 @@ router.get("/", function (req, res) {
 
 router.post("/pd_shipment_status", async function (req, res) {
     const payload = req.body;
+    console.log(payload, "payload1")
     if (!payload || !payload.order_id)
         return res.status(500).send({
             message: "No order id presented",
@@ -142,11 +143,9 @@ router.post("/fulfillment_webhook", async function (req, res) {
             memberNo: "",
             orderDetails: payload.name,
             customerAccountNo: "",
-            dealerNo: +payload.destination.company
-                .split(" ")[0]
-                .replace(/^\D+/g, ""),
+            dealerNo: payload.destination.address2,
         };
-
+        console.log(payload, "payload2")
         const pudo_response = await fetch(`${PUDO_URL}/PlaceShipment`, {
             method: "POST",
             headers: {
